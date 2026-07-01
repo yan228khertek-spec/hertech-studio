@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4149F2">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>hertech-studio — ИИ-решения и автоматизация для бизнеса</title>
+<meta name="description" content="hertech-studio — IT & AI студия полного цикла. Чат-боты, ИИ-агенты продаж, голосовые роботы, автоматизация процессов, парсинг, сайты и Telegram Mini Apps под ключ.">
+<link rel="preload" as="font" type="font/woff2" href="fonts/inter-cyrillic-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/inter-cyrillic-600-normal.woff2" crossorigin>
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-cyrillic-400-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/inter-cyrillic-500-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/inter-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-cyrillic-600-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inter-cyrillic-700-normal.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inter-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/space-grotesk-latin-400-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/space-grotesk-latin-500-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/space-grotesk-latin-600-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Space Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/space-grotesk-latin-700-normal.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  --paper:#f4f3ee; --surface:#ffffff; --ink:#0d0d10; --muted:#5b5b66;
+  --primary:#4149F2; --primary-ink:#2a30c9; --primary-soft:#e9eafd;
+  --lime:#c8f43d; --orange:#ff5a3c; --violet:#7b5cff; --green:#10b981; --pink:#ff5ea8; --amber:#ffb020;
+  --line:rgba(13,13,16,.12); --line-2:rgba(13,13,16,.06);
+  --shadow-sm:0 2px 10px rgba(13,13,16,.05); --shadow-md:0 14px 40px rgba(13,13,16,.10);
+  --shadow-primary:0 18px 44px rgba(65,73,242,.30);
+  --r-sm:10px; --r:16px; --r-lg:24px; --r-xl:40px; --maxw:1280px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:"Space Grotesk","Inter",sans-serif;font-weight:600;line-height:1.05;letter-spacing:-.02em;overflow-wrap:break-word}
+section{padding:112px 0;position:relative}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+:focus-visible{outline:3px solid var(--primary);outline-offset:3px;border-radius:6px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.eyebrow::before{content:"";width:9px;height:9px;background:var(--primary);border-radius:3px;transform:rotate(45deg)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:16px;padding:16px 28px;border-radius:100px;border:1.5px solid var(--ink);transition:transform .2s,background .2s,color .2s,box-shadow .2s;cursor:pointer;background:none}
+.btn svg{width:18px;height:18px;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:hover svg{transform:translate(3px,-3px)}
+.btn-primary{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:var(--shadow-primary)}
+.btn-primary:hover{background:var(--primary-ink);border-color:var(--primary-ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.dots{background-image:radial-gradient(var(--line) 1.4px,transparent 1.4px);background-size:22px 22px}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blob{0%,100%{border-radius:42% 58% 63% 37%/42% 45% 55% 58%}50%{border-radius:58% 42% 37% 63%/55% 58% 42% 45%}}
+@keyframes scroll{to{transform:translateX(-50%)}}
+.float{animation:float 6s ease-in-out infinite}
+.float.d1{animation-delay:-1.5s}.float.d2{animation-delay:-3s}.float.d3{animation-delay:-4.5s}
+.spin-slow{animation:spin 26s linear infinite}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;z-index:100;transition:.3s}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:22px 40px;transition:.3s}
+header.solid .nav{padding:13px 40px;background:rgba(244,243,238,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:11px;font-family:"Space Grotesk";font-weight:600;font-size:22px;letter-spacing:-.03em}
+.logo-mark{width:36px;height:36px;border-radius:11px;background:var(--primary);display:grid;place-items:center;color:#fff;font-size:20px;transform:rotate(-6deg);transition:.3s;box-shadow:var(--shadow-primary)}
+.logo:hover .logo-mark{transform:rotate(8deg) scale(1.05)}
+.logo em{color:var(--primary);font-style:normal}
+.nav-mid{display:flex;gap:32px;align-items:center}
+.nav-mid a{font-size:15px;font-weight:500;position:relative}
+.nav-mid a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--primary);transition:.25s}
+.nav-mid a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:16px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--green);padding:7px 14px;border:1px solid var(--line);border-radius:100px;background:var(--surface)}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;box-shadow:0 0 0 4px rgba(16,185,129,.18)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{width:26px;height:2.5px;background:var(--ink);border-radius:2px;transition:.3s}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1.12fr .88fr;gap:40px;align-items:center;padding:132px 0 88px;position:relative}
+.hero-copy .eyebrow{margin-bottom:26px}
+.hero h1{font-size:clamp(46px,6.4vw,92px);font-weight:600;letter-spacing:-.03em}
+.hl{position:relative;white-space:nowrap}
+.hl svg{position:absolute;left:-4px;right:-4px;bottom:-8px;width:calc(100% + 8px);height:.34em;z-index:-1}
+.rot{color:var(--primary)}
+.hero .lead{font-size:clamp(18px,1.7vw,21px);color:var(--muted);max-width:46ch;margin:30px 0 36px;line-height:1.5}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:40px;margin-top:56px;flex-wrap:wrap}
+.hero-stats b{font-family:"Space Grotesk";font-size:32px;font-weight:600;display:block;letter-spacing:-.02em}
+.hero-stats small{font-size:13.5px;color:var(--muted)}
+/* hero visual */
+.hero-visual{position:relative;height:460px}
+.blob{position:absolute;top:50%;left:50%;width:340px;height:340px;transform:translate(-50%,-50%);background:var(--primary);animation:blob 16s ease-in-out infinite;box-shadow:var(--shadow-primary)}
+.badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.badge-text{font-family:"Space Grotesk";font-size:14px;font-weight:600;letter-spacing:2.5px;fill:#fff;text-transform:uppercase}
+.badge-core{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:74px;height:74px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:var(--shadow-md)}
+.badge-core svg{width:28px;height:28px;stroke:var(--primary)}
+.chip{position:absolute;display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:11px 15px;font-size:14px;font-weight:600;box-shadow:var(--shadow-md)}
+.chip .ic{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;color:#fff}
+.chip svg{width:15px;height:15px;stroke:#fff}
+.c-a{top:34px;left:-6px}.c-b{bottom:56px;right:-10px}
+.shape{position:absolute}
+.s-star{top:8px;right:40px;width:56px;height:56px;color:var(--lime)}
+.s-plus{bottom:20px;left:26px;width:40px;height:40px;color:var(--orange)}
+.s-ring{top:70px;right:-6px;width:60px;height:60px}
+.s-ring circle{fill:none;stroke:var(--violet);stroke-width:2.5;stroke-dasharray:6 8}
+.s-tri{bottom:120px;left:-4px;width:38px;height:38px;color:var(--amber)}
+
+/* MARQUEE */
+.marquee{background:var(--primary);color:#fff;padding:24px 0;overflow:hidden;white-space:nowrap;border-top:1px solid var(--primary-ink);border-bottom:1px solid var(--primary-ink)}
+.marquee-track{display:inline-flex;animation:scroll 34s linear infinite}
+.marquee-track span{font-family:"Space Grotesk";font-weight:600;font-size:30px;letter-spacing:-.01em;padding:0 26px;display:inline-flex;align-items:center;gap:26px}
+.marquee-track span::after{content:"✳";color:var(--lime);font-size:22px}
+.marquee:hover .marquee-track{animation-play-state:paused}
+
+/* SECTION HEAD */
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:56px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(36px,4.4vw,62px);margin-top:14px}
+.sec-head p{color:var(--muted);max-width:38ch}
+
+/* SERVICES */
+.services{background:var(--surface)}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.svc{position:relative;overflow:hidden;padding:34px 32px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);transition:transform .25s,box-shadow .25s;cursor:pointer;isolation:isolate}
+.svc::before{content:"";position:absolute;inset:0;transform:translateY(101%);transition:transform .4s cubic-bezier(.4,0,.1,1);z-index:-1}
+.svc:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:transparent}
+.svc:hover::before{transform:translateY(0)}
+.svc:hover,.svc:hover .svc-top span,.svc:hover p{color:#fff}
+.svc:nth-child(6n+1)::before{background:var(--primary)}
+.svc:nth-child(6n+2)::before{background:var(--ink)}
+.svc:nth-child(6n+3)::before{background:var(--orange)}
+.svc:nth-child(6n+4)::before{background:var(--violet)}
+.svc:nth-child(6n+5)::before{background:var(--green)}
+.svc:nth-child(6n+6)::before{background:var(--pink)}
+.svc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.svc-top span{font-family:"Space Grotesk";font-size:14px;font-weight:600;color:var(--primary)}
+.svc-dot{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--primary-soft);transition:.3s}
+.svc-dot svg{width:18px;height:18px;stroke:var(--primary);transition:.3s}
+.svc:hover .svc-dot{background:rgba(255,255,255,.22)}
+.svc:hover .svc-dot svg{stroke:#fff;transform:translate(2px,-2px)}
+.svc h3{font-size:25px;font-weight:600;margin-bottom:10px}
+.svc p{font-size:15.5px;color:var(--muted);line-height:1.5}
+.svc-ghost{position:absolute;right:18px;bottom:-30px;font-family:"Space Grotesk";font-size:130px;font-weight:700;color:var(--ink);opacity:.04;z-index:-1;transition:.3s}
+.svc:hover .svc-ghost{color:#fff;opacity:.12}
+
+/* STATEMENT */
+.statement{background:var(--ink);color:#fff;overflow:hidden}
+.statement .wrap{position:relative;z-index:1}
+.statement h2{font-size:clamp(38px,6vw,84px);font-weight:600;max-width:20ch;letter-spacing:-.03em}
+.statement h2 em{font-style:normal;color:var(--lime)}
+.statement h2 u{text-decoration:none;color:var(--primary);text-decoration:underline;text-decoration-color:var(--primary);text-underline-offset:8px;text-decoration-thickness:4px}
+.statement p{color:rgba(255,255,255,.66);max-width:52ch;margin-top:26px;font-size:19px}
+.ghost-word{position:absolute;right:-10px;top:40px;font-family:"Space Grotesk";font-size:clamp(120px,22vw,300px);font-weight:700;color:transparent;-webkit-text-stroke:1.4px rgba(255,255,255,.10);z-index:0;pointer-events:none;line-height:.8}
+.st-shape{position:absolute;z-index:0;pointer-events:none}
+.st-star{top:60px;left:44%;width:44px;color:var(--orange)}
+.st-plus{bottom:50px;left:8%;width:40px;color:var(--primary)}
+.st-ring{bottom:70px;right:12%;width:70px;height:70px}
+.st-ring circle{fill:none;stroke:var(--violet);stroke-width:2.5;stroke-dasharray:5 8}
+
+/* PROCESS */
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.proc{position:relative;padding-top:30px}
+.proc-n{position:absolute;top:-14px;left:0;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:"Space Grotesk";font-weight:600;color:#fff;font-size:18px;box-shadow:var(--shadow-sm)}
+.proc:nth-child(1) .proc-n{background:var(--primary)}
+.proc:nth-child(2) .proc-n{background:var(--orange)}
+.proc:nth-child(3) .proc-n{background:var(--violet)}
+.proc:nth-child(4) .proc-n{background:var(--green)}
+.proc h3{font-size:22px;font-weight:600;margin:34px 0 10px}
+.proc p{font-size:15px;color:var(--muted);line-height:1.5}
+.proc::after{content:"";position:absolute;top:12px;left:64px;right:-4px;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 16px)}
+.proc:last-child::after{display:none}
+
+/* CASES */
+.cases{background:var(--surface)}
+.case-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.case{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:var(--paper);transition:transform .3s,box-shadow .3s;cursor:pointer}
+.case:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.case-vis{height:230px;position:relative;overflow:hidden;display:grid;place-items:center}
+.case-vis .num{font-family:"Space Grotesk";font-weight:700;font-size:76px;color:#fff;z-index:2}
+.case-vis .rings{position:absolute;inset:0;opacity:.5}
+.case-vis .rings i{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:1.5px solid rgba(255,255,255,.4);border-radius:50%}
+.case-vis .rings i:nth-child(1){width:120px;height:120px}
+.case-vis .rings i:nth-child(2){width:210px;height:210px}
+.case-vis .rings i:nth-child(3){width:300px;height:300px}
+.case-arrow{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;background:#fff;display:grid;place-items:center;opacity:0;transform:translateY(-6px);transition:.3s;z-index:3}
+.case-arrow svg{width:18px;height:18px;stroke:var(--ink)}
+.case:hover .case-arrow{opacity:1;transform:none}
+.cv1{background:var(--primary)}.cv2{background:var(--ink)}.cv3{background:var(--orange)}.cv4{background:var(--green)}
+.case-body{padding:24px 26px 28px}
+.case-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.tag{font-size:12px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:6px 12px;border-radius:100px;background:var(--primary-soft);color:var(--primary-ink)}
+.case h3{font-size:23px;font-weight:600;margin-bottom:8px}
+.case-body p{color:var(--muted);font-size:15px}
+.case-res{display:inline-flex;align-items:center;gap:9px;font-weight:600;color:var(--primary-ink);font-size:15px;margin-top:16px;background:var(--primary-soft);padding:9px 15px;border-radius:100px}
+.case-res b{font-family:"Space Grotesk"}
+
+/* STATS BAND */
+.band{background:var(--primary);color:#fff;overflow:hidden}
+.band .wrap{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.band-item b{font-family:"Space Grotesk";font-size:clamp(40px,4vw,60px);font-weight:600;display:block;letter-spacing:-.02em}
+.band-item span{font-size:15px;opacity:.86}
+.band .dots{position:absolute;inset:0;opacity:.22;z-index:0;background-image:radial-gradient(rgba(255,255,255,.5) 1.4px,transparent 1.4px);background-size:24px 24px}
+
+/* CONTACT */
+.contact{position:relative;overflow:hidden}
+.contact .cblob{position:absolute;top:10%;right:-120px;width:360px;height:360px;background:var(--lime);opacity:.5;animation:blob 18s ease-in-out infinite;z-index:0}
+.contact .wrap{position:relative;z-index:1}
+.contact h2{font-size:clamp(40px,5.6vw,82px);font-weight:600;max-width:15ch;margin-bottom:22px;letter-spacing:-.03em}
+.contact-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
+.contact-lead{color:var(--muted);font-size:19px;margin-bottom:30px;max-width:40ch}
+.contact-methods{display:flex;flex-direction:column;gap:12px}
+.cm{display:flex;align-items:center;gap:16px;padding:19px 22px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);transition:.25s;font-weight:600}
+.cm:hover{background:var(--ink);color:var(--paper);transform:translateX(6px)}
+.cm .ic{width:44px;height:44px;border-radius:12px;background:var(--primary-soft);display:grid;place-items:center;flex-shrink:0;transition:.25s}
+.cm .ic svg{width:22px;height:22px;stroke:var(--primary)}
+.cm:hover .ic{background:rgba(255,255,255,.16)}.cm:hover .ic svg{stroke:#fff}
+.cm small{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+.cm:hover small{color:rgba(255,255,255,.7)}
+form{display:flex;flex-direction:column;gap:16px;background:var(--surface);padding:32px;border-radius:var(--r-lg);border:1px solid var(--line);box-shadow:var(--shadow-md)}
+label{font-size:14px;font-weight:600;margin-bottom:-8px}
+input,textarea{font-family:inherit;font-size:16px;padding:15px 17px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper);color:var(--ink);transition:.2s;width:100%}
+input:focus,textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-soft)}
+textarea{resize:vertical;min-height:106px}
+
+/* FOOTER */
+footer{background:var(--ink);color:#fff;padding:88px 0 36px;position:relative;overflow:hidden}
+.foot-top{display:flex;justify-content:space-between;gap:50px;flex-wrap:wrap;padding-bottom:54px;border-bottom:1px solid rgba(255,255,255,.14)}
+.foot-brand{max-width:34ch}
+.foot-mark{font-family:"Space Grotesk";font-size:clamp(60px,9vw,120px);font-weight:700;letter-spacing:-.04em;line-height:.9;display:flex;align-items:center;gap:6px}
+.foot-mark em{color:var(--primary);font-style:normal}
+.foot-mark .fstar{width:.32em;height:.32em;color:var(--lime)}
+.foot-brand p{color:rgba(255,255,255,.6);margin-top:18px}
+.foot-cols{display:flex;gap:64px;flex-wrap:wrap}
+.foot-col h4{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.5);margin-bottom:16px;font-weight:600}
+.foot-col a{display:block;color:rgba(255,255,255,.82);padding:6px 0;font-size:15px;transition:.2s}
+.foot-col a:hover{color:var(--lime);padding-left:6px}
+.foot-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:28px;font-size:14px;color:rgba(255,255,255,.5)}
+.totop{position:fixed;right:26px;bottom:26px;width:52px;height:52px;border-radius:50%;background:var(--primary);border:none;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow-primary);opacity:0;transform:translateY(20px);transition:.3s;z-index:90}
+.totop.show{opacity:1;transform:none}
+.totop svg{width:22px;height:22px;stroke:#fff}
+
+/* REVEAL + CURSOR */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.cursor{position:fixed;top:0;left:0;width:12px;height:12px;border-radius:50%;background:var(--primary);pointer-events:none;z-index:9999;mix-blend-mode:multiply;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s}
+.cursor.big{width:46px;height:46px;opacity:.4}
+@media(hover:none){.cursor{display:none}}
+
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .proc-grid{grid-template-columns:repeat(2,1fr);gap:40px 22px}
+  .proc::after{display:none}
+}
+@media(max-width:820px){
+  section{padding:76px 0}
+  .wrap,.nav{padding-left:22px;padding-right:22px}
+  .nav-mid,.pill{display:none}
+  .nav-right .btn{display:none}
+  .burger{display:flex}
+  .nav-mid.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 22px 20px}
+  .nav-mid.open a{padding:14px 0;border-bottom:1px solid var(--line-2);width:100%}
+  .svc-grid,.case-grid,.band .wrap,.contact-grid{grid-template-columns:1fr}
+  .band .wrap{gap:34px}
+  .hero{padding:104px 0 56px}
+}
+@media(max-width:520px){
+  .proc-grid{grid-template-columns:1fr;gap:34px}
+  .hero h1{font-size:clamp(30px,8.5vw,38px)}
+  .hero .lead{font-size:17px;margin:24px 0 30px}
+  .hero-stats{gap:22px;margin-top:40px}
+  .hero-stats b{font-size:28px}
+  .sec-head h2{font-size:clamp(28px,7vw,34px)}
+  .statement h2{font-size:clamp(28px,7.5vw,36px)}
+  .contact h2{font-size:clamp(30px,8vw,40px)}
+  .contact-grid{gap:36px}
+  .svc{padding:28px 22px}
+  .svc h3{font-size:22px}
+  .marquee-track span{font-size:24px;padding:0 20px}
+  .foot-mark{font-size:clamp(46px,13vw,60px)}
+  .foot-top{gap:32px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<header id="header">
+  <nav class="wrap nav">
+    <a href="#top" class="logo"><span class="logo-mark">h</span>hertech<em>.</em></a>
+    <div class="nav-mid" id="navmid">
+      <a href="#services">Услуги</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#process">Процесс</a>
+      <a href="#contact">Контакты</a>
+    </div>
+    <div class="nav-right">
+      <a href="#contact" class="btn btn-primary">Обсудить проект</a>
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">IT &amp; AI студия полного цикла</span>
+      <h1>Автоматизируем <span class="hl"><span class="rot" id="rot">продажи</span><svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 Q100 2 197 12" fill="none" stroke="#c8f43d" stroke-width="7" stroke-linecap="round"/></svg></span> с помощью ИИ</h1>
+      <p class="lead">Чат-боты, ИИ-агенты, голосовые роботы, автоматизация и сайты — под ключ. Работают 24/7, без выходных и человеческого фактора.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary">Обсудить проект <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+        <a href="#services" class="btn btn-ghost">Смотреть услуги</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>24/7</b><small>работают без перерыва</small></div>
+        <div><b>10+</b><small>направлений под ключ</small></div>
+        <div><b>от 3&nbsp;дней</b><small>до результата</small></div>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="blob float"></div>
+      <svg class="badge spin-slow" viewBox="0 0 220 220" width="240" height="240"><defs><path id="bc" d="M110,110 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs><text class="badge-text"><textPath href="#bc" xlink:href="#bc">hertech • ai • automation • bots • sites • </textPath></text></svg>
+      <div class="badge-core"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></div>
+      <div class="chip c-a float d1"><span class="ic" style="background:var(--orange)"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M8 10h8M8 14h5"/><rect x="3" y="4" width="18" height="16" rx="3"/></svg></span>Чат-бот 24/7</div>
+      <div class="chip c-b float d2"><span class="ic" style="background:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12l5 5L20 6"/></svg></span>Лид закрыт</div>
+      <svg class="shape s-star float d3" viewBox="0 0 100 100" fill="currentColor"><path d="M50 0C54 34 66 46 100 50C66 54 54 66 50 100C46 66 34 54 0 50C34 46 46 34 50 0Z"/></svg>
+      <svg class="shape s-plus float d1" viewBox="0 0 100 100" fill="currentColor"><path d="M42 8h16v34h34v16H58v34H42V58H8V42h34z"/></svg>
+      <svg class="shape s-ring spin-slow" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46"/></svg>
+      <svg class="shape s-tri float d2" viewBox="0 0 100 100" fill="currentColor"><path d="M50 6l44 82H6z"/></svg>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>AI чат-боты</span><span>Автоматизация</span><span>ИИ-агенты продаж</span><span>Голосовые роботы</span><span>SMM с ИИ</span><span>Парсинг данных</span><span>Сайты</span><span>Tg Mini Apps</span>
+      <span>AI чат-боты</span><span>Автоматизация</span><span>ИИ-агенты продаж</span><span>Голосовые роботы</span><span>SMM с ИИ</span><span>Парсинг данных</span><span>Сайты</span><span>Tg Mini Apps</span>
+    </div>
+  </div>
+
+  <section class="services" id="services">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow">Услуги</span><h2>Что мы делаем</h2></div>
+        <p>Полный спектр IT- и ИИ-решений — от простого бота до системы автоматизации всего бизнеса.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc reveal"><div class="svc-top"><span>01</span><span class="svc-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><h3>AI чат-боты</h3><p>Приём заявок и поддержка 24/7 в Telegram, WhatsApp и на сайте.</p><span class="svc-ghost">01</span></div>
+        <div class="svc reveal"><div class="svc-top"><span>02</span><span class="svc-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><h3>SMM и контент с ИИ</h3><p>Посты, тексты и визуал на потоке — без творческого выгорания.</p><span class="svc-ghost">02</span></div>
+        <div class="svc reveal"><div class="svc-top"><span>03</span><span class="svc-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><h3>Автоматизация процессов</h3><p>Связываем ваши сервисы в единую систему на n8n / Make.</p><span class="svc-ghost">03</span></div>
+        <div class="svc reveal"><div class="svc-top"><span>04</span><span class="svc-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><h3>ИИ-агент отдела продаж</h3><p>Обрабатывает лиды, отвечает и доводит клиента до сделки.</p><span class="svc-ghost">04</span></div>
+        <div class="svc reveal"><div class="svc-top"><span>05</span><span class="svc-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><h3>Голосовой робот обзвона</h3><p>Звонит за вас, квалифицирует клиентов и фиксирует результат.</p><span class="svc-ghost">05</span></div>
+        <div class="svc reveal"><div class="svc-top"><span>06</span><span class="svc-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><h3>Парсинг данных и отчёты</h3><p>Собираем и структурируем информацию в готовые отчёты.</p><span class="svc-ghost">06</span></div>
+        <div class="svc reveal"><div class="svc-top"><span>07</span><span class="svc-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><h3>Аудит и консалтинг по ИИ</h3><p>Покажем, где вы теряете время и деньги, и как это исправить.</p><span class="svc-ghost">07</span></div>
+        <div class="svc reveal"><div class="svc-top"><span>08</span><span class="svc-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><h3>Боты любой сложности</h3><p>От простых сценариев до многоступенчатых систем под задачу.</p><span class="svc-ghost">08</span></div>
+        <div class="svc reveal"><div class="svc-top"><span>09</span><span class="svc-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><h3>Сайты и веб-приложения</h3><p>Фронтенд и бэкенд под ключ — от лендинга до сервиса.</p><span class="svc-ghost">09</span></div>
+        <div class="svc reveal"><div class="svc-top"><span>10</span><span class="svc-dot"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><h3>Telegram Mini Apps</h3><p>Полноценные приложения прямо внутри Telegram.</p><span class="svc-ghost">10</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="statement">
+    <span class="ghost-word" aria-hidden="true">AI</span>
+    <svg class="st-shape st-star float" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M50 0C54 34 66 46 100 50C66 54 54 66 50 100C46 66 34 54 0 50C34 46 46 34 50 0Z"/></svg>
+    <svg class="st-shape st-plus float d2" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M42 8h16v34h34v16H58v34H42V58H8V42h34z"/></svg>
+    <svg class="st-shape st-ring spin-slow" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46"/></svg>
+    <div class="wrap">
+      <h2 class="reveal">Меньше <u>рутины</u>. Больше <em>результата</em>.</h2>
+      <p class="reveal">Мы берём на себя всё, что можно автоматизировать — заявки, продажи, обзвон, контент и отчёты. Вы занимаетесь бизнесом, ИИ занимается рутиной.</p>
+    </div>
+  </section>
+
+  <section class="process wrap" id="process">
+    <div class="sec-head reveal">
+      <div><span class="eyebrow">Процесс</span><h2>Как мы работаем</h2></div>
+      <p>Прозрачно и по шагам — вы всегда понимаете, что происходит и зачем.</p>
+    </div>
+    <div class="proc-grid">
+      <div class="proc reveal"><div class="proc-n">1</div><h3>Заявка и цели</h3><p>Обсуждаем задачу, процессы и результат, который вам нужен.</p></div>
+      <div class="proc reveal"><div class="proc-n">2</div><h3>Решение и смета</h3><p>Предлагаем архитектуру, сроки и стоимость. Без воды.</p></div>
+      <div class="proc reveal"><div class="proc-n">3</div><h3>Сборка и тесты</h3><p>Собираем систему, интегрируем сервисы и всё тестируем.</p></div>
+      <div class="proc reveal"><div class="proc-n">4</div><h3>Запуск и поддержка</h3><p>Запускаем, обучаем команду и сопровождаем дальше.</p></div>
+    </div>
+  </section>
+
+  <section class="cases" id="cases">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="eyebrow">Кейсы</span><h2>Примеры решений</h2></div>
+        <p>Демо-карточки под ваши будущие проекты — заменим на реальные кейсы.</p>
+      </div>
+      <div class="case-grid">
+        <div class="case reveal"><div class="case-vis cv1"><div class="rings"><i></i><i></i><i></i></div><div class="num">01</div><span class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><div class="case-body"><div class="case-tags"><span class="tag">Telegram</span><span class="tag">GPT</span></div><h3>Чат-бот для автосервиса</h3><p>Принимает заявки и записывает клиентов круглосуточно.</p><div class="case-res"><b>24/7</b> без оператора</div></div></div>
+        <div class="case reveal"><div class="case-vis cv2"><div class="rings"><i></i><i></i><i></i></div><div class="num">02</div><span class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><div class="case-body"><div class="case-tags"><span class="tag">CRM</span><span class="tag">n8n</span></div><h3>ИИ-агент отдела продаж</h3><p>Отвечает лидам за секунды и доводит до сделки.</p><div class="case-res"><b>×3</b> скорость ответа</div></div></div>
+        <div class="case reveal"><div class="case-vis cv3"><div class="rings"><i></i><i></i><i></i></div><div class="num">03</div><span class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><div class="case-body"><div class="case-tags"><span class="tag">Voice</span><span class="tag">ASR</span></div><h3>Голосовой робот обзвона</h3><p>Обзванивает базу и квалифицирует клиентов.</p><div class="case-res"><b>1000+</b> звонков в день</div></div></div>
+        <div class="case reveal"><div class="case-vis cv4"><div class="rings"><i></i><i></i><i></i></div><div class="num">04</div><span class="case-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></span></div><div class="case-body"><div class="case-tags"><span class="tag">Web</span><span class="tag">Mini App</span></div><h3>Лендинг + Telegram Mini App</h3><p>Заявка в один клик прямо внутри Telegram.</p><div class="case-res"><b>+</b> конверсия в заявку</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="band-item reveal"><b>24/7</b><span>работают без перерыва и выходных</span></div>
+      <div class="band-item reveal"><b>10+</b><span>направлений в одной студии</span></div>
+      <div class="band-item reveal"><b>от 3&nbsp;дней</b><span>до первого результата</span></div>
+      <div class="band-item reveal"><b>1</b><span>подрядчик на весь IT-стек</span></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="cblob" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="sec-head reveal" style="margin-bottom:36px"><div><span class="eyebrow">Контакты</span></div></div>
+      <div class="contact-grid">
+        <div class="reveal">
+          <h2>Обсудим ваш проект?</h2>
+          <p class="contact-lead">Расскажите задачу — предложим решение и оценим сроки. Первая консультация и аудит бесплатны.</p>
+          <div class="contact-methods">
+            <a href="https://t.me/hertech" class="cm" rel="noopener noreferrer"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 4L3 11l6 2 2 6 3-4 4 3z"/></svg></span><div>Telegram<small>@hertech — ответим быстро</small></div></a>
+            <a href="mailto:hello@hertech-studio.ru" class="cm"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div>Email<small>hello@hertech-studio.ru</small></div></a>
+          </div>
+        </div>
+        <form class="reveal" id="leadform">
+          <label for="fn">Как вас зовут</label>
+          <input id="fn" name="name" placeholder="Иван" required>
+          <label for="ct">Телеграм или телефон</label>
+          <input id="ct" name="contact" placeholder="@username / +7…" required>
+          <label for="ms">Что нужно сделать</label>
+          <textarea id="ms" name="msg" placeholder="Например: бот для приёма заявок в Telegram"></textarea>
+          <button type="submit" class="btn btn-primary" style="justify-content:center;width:100%">Отправить заявку <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></button>
+          <small style="color:var(--muted);font-size:13px">Нажимая кнопку, вы соглашаетесь на обработку данных.</small>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-mark">hertech<em>.</em><svg class="fstar spin-slow" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M50 0C54 34 66 46 100 50C66 54 54 66 50 100C46 66 34 54 0 50C34 46 46 34 50 0Z"/></svg></div>
+        <p>IT &amp; AI студия полного цикла. Автоматизируем бизнес и создаём решения, которые работают за вас.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col"><h4>Услуги</h4><a href="#services">Чат-боты</a><a href="#services">Автоматизация</a><a href="#services">ИИ-агенты</a><a href="#services">Сайты</a></div>
+        <div class="foot-col"><h4>Студия</h4><a href="#process">Как работаем</a><a href="#cases">Кейсы</a><a href="#contact">Контакты</a></div>
+        <div class="foot-col"><h4>Связь</h4><a href="https://t.me/hertech" rel="noopener noreferrer">Telegram</a><a href="mailto:hello@hertech-studio.ru">Email</a></div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 hertech-studio. Все права защищены.</span>
+      <span>Сделано в hertech-studio</span>
+    </div>
+  </div>
+</footer>
+
+<button class="totop" id="totop" aria-label="Наверх"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+<script>
+(function(){
+  var header=document.getElementById('header'),totop=document.getElementById('totop');
+  addEventListener('scroll',function(){var y=scrollY;header.classList.toggle('solid',y>40);totop.classList.toggle('show',y>600)},{passive:true});
+  totop.addEventListener('click',function(){scrollTo({top:0,behavior:'smooth'})});
+
+  var burger=document.getElementById('burger'),mid=document.getElementById('navmid');
+  burger.addEventListener('click',function(){var o=mid.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  mid.addEventListener('click',function(e){if(e.target.tagName==='A'){mid.classList.remove('open');burger.setAttribute('aria-expanded','false')}});
+
+  var words=['продажи','заявки','поддержку','контент','отчёты','рутину'],i=0,rot=document.getElementById('rot');
+  rot.style.transition='opacity .22s';
+  setInterval(function(){i=(i+1)%words.length;rot.style.opacity=0;setTimeout(function(){rot.textContent=words[i];rot.style.opacity=1},220)},2300);
+
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+  if(matchMedia('(pointer:fine)').matches){
+    var cur=document.getElementById('cursor'),cx=0,cy=0,tx=0,ty=0;
+    addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY});
+    (function loop(){cx+=(tx-cx)*.22;cy+=(ty-cy)*.22;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
+    document.querySelectorAll('a,button,.svc,.case').forEach(function(el){
+      el.addEventListener('mouseenter',function(){cur.classList.add('big')});
+      el.addEventListener('mouseleave',function(){cur.classList.remove('big')});
+    });
+  }
+
+  var lead=document.getElementById('leadform');
+  if(lead)lead.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=function(id){var el=document.getElementById(id);return el?(el.value||'').trim():''};
+    var body=encodeURIComponent('Имя: '+v('fn')+'\nКонтакт: '+v('ct')+'\nЗадача: '+v('ms'));
+    window.location.href='mailto:hello@hertech-studio.ru?subject='+encodeURIComponent('Заявка с сайта')+'&body='+body;
+  });
+})();
+</script>
+</body>
+</html>
