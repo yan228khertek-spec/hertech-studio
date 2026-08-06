@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#4149F2">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://api.telegram.org; form-action 'self'; base-uri 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>hertech-studio — ИИ-решения и автоматизация для бизнеса</title>
 <meta name="description" content="hertech-studio — IT & AI студия полного цикла. Чат-боты, ИИ-агенты продаж, голосовые роботы, автоматизация процессов, парсинг, сайты и Telegram Mini Apps под ключ.">
@@ -519,9 +519,32 @@ footer{background:var(--ink);color:#fff;padding:88px 0 36px;position:relative;ov
   if(lead)lead.addEventListener('submit',function(e){
     e.preventDefault();
     var v=function(id){var el=document.getElementById(id);return el?(el.value||'').trim():''};
-    var body=encodeURIComponent('Имя: '+v('fn')+'\nКонтакт: '+v('ct')+'\nЗадача: '+v('ms'));
-    window.location.href='mailto:khertek_yan@hertech-studio.ru?subject='+encodeURIComponent('Заявка с сайта')+'&body='+body;
+    var btn=lead.querySelector('button[type="submit"],.btn');
+    var name=v('fn'),ct=v('ct'),ms=v('ms');
+    var text='🔥 Новая заявка с сайта\n\n'+
+      '👤 Имя: '+name+'\n'+
+      '📱 Контакт: '+ct+'\n'+
+      '📝 Задача: '+(ms||'—')+'\n\n'+
+      '🕐 '+new Date().toLocaleString('ru-RU',{timeZone:'Europe/Moscow'})+' МСК';
+    var done=function(ok){
+      if(btn){btn.textContent=ok?'✓ Заявка отправлена':'Ошибка — напишите на почту';btn.disabled=ok}
+      if(ok)lead.reset();
+      setTimeout(function(){if(btn){btn.textContent='Отправить заявку';btn.disabled=false}},5000);
+    };
+    if(btn){btn.textContent='Отправляем…';btn.disabled=true}
+    fetch('https://api.telegram.org/bot'+TG_T+'/sendMessage',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:TG_C,text:text})
+    }).then(function(r){return r.json()}).then(function(j){
+      done(!!j.ok);
+      if(!j.ok)window.location.href='mailto:khertek_yan@hertech-studio.ru?subject='+encodeURIComponent('Заявка с сайта')+'&body='+encodeURIComponent('Имя: '+name+'\nКонтакт: '+ct+'\nЗадача: '+ms);
+    }).catch(function(){
+      done(false);
+      window.location.href='mailto:khertek_yan@hertech-studio.ru?subject='+encodeURIComponent('Заявка с сайта')+'&body='+encodeURIComponent('Имя: '+name+'\nКонтакт: '+ct+'\nЗадача: '+ms);
+    });
   });
+  var TG_T='8651457746:AAHENPNFlZU3X28HNB3Akff4Qk3TCYm3G34',TG_C='1291657098';
 })();
 </script>
 </body>
