@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#4149F2">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://api.telegram.org; form-action 'self'; base-uri 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>hertech-studio — ИИ-решения и автоматизация для бизнеса</title>
@@ -309,6 +313,9 @@ footer{background:var(--ink);color:#fff;padding:88px 0 36px;position:relative;ov
   .foot-mark{font-size:clamp(46px,13vw,60px)}
   .foot-top{gap:32px}
 }
+.copy-toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;font-size:14px;font-weight:500;padding:12px 20px;border-radius:12px;box-shadow:0 8px 24px rgba(13,13,16,.25);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:9999;white-space:nowrap}
+.copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.copy-toast b{color:var(--lime)}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
@@ -514,6 +521,25 @@ footer{background:var(--ink);color:#fff;padding:88px 0 36px;position:relative;ov
       el.addEventListener('mouseleave',function(){cur.classList.remove('big')});
     });
   }
+
+  var toastEl=null,toastT=null;
+  function toast(html){
+    if(!toastEl){toastEl=document.createElement('div');toastEl.className='copy-toast';document.body.appendChild(toastEl)}
+    toastEl.innerHTML=html;toastEl.classList.add('show');
+    clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show')},2200);
+  }
+  function copyText(t,ok){
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){legacyCopy(t);ok()})}
+    else{legacyCopy(t);ok()}
+  }
+  function legacyCopy(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(e){}document.body.removeChild(ta)}
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(el){
+    el.addEventListener('contextmenu',function(e){
+      e.preventDefault();
+      var em=el.getAttribute('href').replace(/^mailto:/,'').split('?')[0];
+      copyText(em,function(){toast('Почта скопирована: <b>'+em+'</b>')});
+    });
+  });
 
   var lead=document.getElementById('leadform');
   if(lead)lead.addEventListener('submit',function(e){
