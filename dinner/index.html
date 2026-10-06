@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Survive the Family Dinner</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Noto+Serif+SC:wght@600;900&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: one-hand phone game — a single centered column, card per scene.
+   Single-theme by design: ink on rice paper, matching the deck. */
+:root{
+  --paper:#f5f0e6;
+  --paper2:#ece4d4;
+  --card:#fdfaf3;
+  --ink:#211c17;
+  --mut:#5c544b;
+  --hair:rgba(33,28,23,.18);
+  --seal:#b02e24;
+  --blue:#16437c;
+  --green:#1a7a4d;
+  --good:#1a7a4d;
+  --bad:#b02e24;
+  --disp:"Cormorant Garamond",Georgia,serif;
+  --hanzi:"Noto Serif SC","Songti SC","SimSun",serif;
+  --body:"Spectral",Georgia,serif;
+}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .13 0 0 0 0 .11 0 0 0 0 .09 0 0 0 .045 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wrap{max-width:480px;margin:0 auto;padding:18px 16px 40px;display:flex;flex-direction:column;gap:14px;min-height:96%}
+header{text-align:center;padding-top:6px}
+.kicker{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--mut)}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(26px,7.5vw,34px);line-height:1.05;margin:.2em 0 .1em;text-wrap:balance}
+h1 .b{color:var(--blue)}h1 .g{color:var(--green)}
+.sub{font-size:13px;font-style:italic;color:var(--mut);margin:0}
+/* harmony meter */
+.meter{display:flex;align-items:center;gap:10px}
+.meter .hz{font-family:var(--hanzi);font-weight:900;font-size:22px;color:var(--seal)}
+.meter .bar{flex:1;height:10px;border:1.5px solid var(--ink);border-radius:6px;overflow:hidden;background:var(--card)}
+.meter .fill{height:100%;width:50%;background:linear-gradient(90deg,var(--seal),var(--ochre,#b3762e) 40%,var(--green));
+  transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.meter .lab{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);min-width:5.2em;text-align:right}
+/* card */
+.card{background:var(--card);border:1.5px solid var(--ink);box-shadow:6px 7px 0 rgba(33,28,23,.1);
+  padding:18px 16px;position:relative}
+.stepno{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--seal)}
+.who{display:flex;align-items:center;gap:10px;margin:10px 0 6px}
+.ava{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--ink);display:flex;align-items:center;justify-content:center;
+  font-family:var(--hanzi);font-weight:900;font-size:20px;background:var(--paper2);flex-shrink:0}
+.ava.b{color:var(--blue)}.ava.g{color:var(--green)}.ava.n{color:var(--ink)}
+.who .nm{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.line{font-family:var(--disp);font-size:clamp(19px,5.2vw,24px);font-weight:600;line-height:1.3;margin:.2em 0 .5em;text-wrap:balance}
+.ctx{font-size:14px;font-weight:300;line-height:1.5;color:var(--mut);font-style:italic;margin:0 0 12px}
+.opts{display:flex;flex-direction:column;gap:10px}
+button.opt{font-family:var(--body);font-size:15px;font-weight:400;line-height:1.4;text-align:left;
+  background:var(--paper);border:1.5px solid var(--ink);padding:12px 14px;cursor:pointer;color:var(--ink);
+  transition:transform .12s ease, box-shadow .12s ease;border-radius:2px}
+button.opt:active{transform:translate(2px,2px)}
+button.opt:hover{box-shadow:4px 4px 0 rgba(33,28,23,.18)}
+button.opt:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+button.opt .k{font-family:var(--hanzi);color:var(--seal);font-weight:600;margin-right:8px}
+/* feedback */
+.fb{border-left:3px solid var(--good);padding:10px 12px;background:var(--paper);font-size:14px;line-height:1.45}
+.fb.bad{border-color:var(--bad)}
+.fb b{font-family:var(--body);letter-spacing:.06em}
+.fb .delta{font-weight:500}
+.fb.bad .delta{color:var(--bad)}.fb:not(.bad) .delta{color:var(--good)}
+.next{align-self:flex-end;margin-top:10px;background:var(--ink);color:var(--paper);border:0;cursor:pointer;
+  font-family:var(--body);font-size:12px;letter-spacing:.2em;text-transform:uppercase;padding:10px 18px;border-radius:2px}
+.next:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+/* result */
+.seal{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+  width:84px;height:84px;background:var(--seal);color:#f7ede4;font-family:var(--hanzi);font-weight:600;
+  font-size:26px;line-height:1.15;border-radius:8px;transform:rotate(-4deg);
+  box-shadow:inset 0 0 14px rgba(60,8,4,.55);margin:6px auto 10px}
+.rtitle{font-family:var(--disp);font-weight:700;font-size:clamp(24px,6.6vw,30px);line-height:1.1;margin:.2em 0;text-wrap:balance}
+.rtext{font-size:15px;font-weight:300;line-height:1.55}
+.moral{border-top:1px solid var(--hair);margin-top:14px;padding-top:12px;font-style:italic;font-size:14px;color:var(--mut)}
+.again{display:block;width:100%;margin-top:14px;background:var(--ink);color:var(--paper);border:0;cursor:pointer;
+  font-family:var(--body);font-size:13px;letter-spacing:.2em;text-transform:uppercase;padding:14px;border-radius:2px}
+footer{text-align:center;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-top:auto;padding-top:8px}
+.fade{animation:fade .45s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.fade{animation:none}.meter .fill{transition:none}}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <p class="kicker">圍爐 · a one-minute game</p>
+    <h1>Survive the <span class="b">Family</span> <span class="g">Dinner</span></h1>
+    <p class="sub">Lunar New Year. Taipei. One table, two camps, five decisions.</p>
+  </header>
+
+  <div class="meter" aria-label="Family harmony meter">
+    <span class="hz" aria-hidden="true">和</span>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+    <span class="lab" id="score">harmony 5/10</span>
+  </div>
+
+  <div id="stage"></div>
+
+  <footer>“Blue vs Green” · made by Ian Khertek · hertech studio</footer>
+</div>
+
+<script>
+(function(){
+var SCENES=[
+ {who:"Grandpa 爺爺",ava:"爺",tone:"b",
+  line:"“These politicians today are ruining everything!! Am I right?”",
+  ctx:"He turns up the TV news. The volume. The stakes. Everyone looks at you.",
+  opts:[
+   {t:"“Grandpa — taste the fish first. It's incredible this year.”",d:+2,
+    fb:"Fish diplomacy. He takes a bite, nods, forgets the TV. Grandma smiles at you."},
+   {t:"Share your own detailed analysis of the election.",d:-2,
+    fb:"Three relatives inhale at once. The fish goes cold. Grandma turns the TV off — loudly."},
+   {t:"“Mm! Interesting! …Who wants more tea?”",d:+1,
+    fb:"The classic evasive manoeuvre. Weak, but the teapot buys you ninety seconds of peace."}
+  ]},
+ {who:"Cousin Mei 表妹",ava:"表",tone:"g",
+  line:"“Did you SEE what grandpa forwards to the family chat?”",
+  ctx:"She whispers it over the dumplings, eyes rolling. Grandpa is two seats away.",
+  opts:[
+   {t:"“I saw your new job post! Tell me everything.”",d:+2,
+    fb:"Masterful redirect. She talks about her office for ten minutes. Nobody is forwarded anything."},
+   {t:"“Yes!! And honestly, he is SO wrong—”",d:-2,
+    fb:"Grandpa's hearing is selectively excellent. The table goes very, very quiet."},
+   {t:"Silently show her a cat video under the table.",d:+1,
+    fb:"She snorts into her tea. Crisis delayed. The cat gets forwarded instead."}
+  ]},
+ {who:"Uncle Chen 叔叔",ava:"叔",tone:"n",
+  line:"“A toast! To the future of our—”",
+  ctx:"He pauses dramatically, glass raised. The whole table freezes mid-chopstick.",
+  opts:[
+   {t:"Jump in: “—FAMILY! 家和萬事興!”",d:+2,
+    fb:"“Harmony at home brings prosperity.” Even grandpa raises his glass. You absolute diplomat."},
+   {t:"Let him finish the sentence.",d:-2,
+    fb:"He finishes it. Politically. Two aunts leave for the kitchen “to check the soup”."},
+   {t:"“To grandma's cooking — the only thing we ALL vote for!”",d:+1,
+    fb:"Laughter. Grandma pretends to be annoyed and gives everyone second helpings."}
+  ]},
+ {who:"The family chat 家族群",ava:"群",tone:"n",
+  line:"Ping. Ping. Ping-ping-ping.",
+  ctx:"Auntie has forwarded a campaign video to the group chat. Mid-dinner. Grandpa reaches for his phone…",
+  opts:[
+   {t:"“Phones down — family photo time! Say 茄子!”",d:+2,
+    fb:"“Eggplant!” Everyone smiles for the camera. The video dies quietly, unwatched."},
+   {t:"Read the forwarded video's title out loud.",d:-2,
+    fb:"Why. WHY. The debate begins before you reach the second word."},
+   {t:"Mumble: “Hm, the wi-fi seems down…”",d:+1,
+    fb:"A small lie for a great peace. Confucius would… probably understand."}
+  ]},
+ {who:"The TV, again 電視",ava:"電",tone:"n",
+  line:"Dessert arrives — and so does the evening political debate.",
+  ctx:"The remote lies exactly between grandpa and cousin Mei. Both reach for it.",
+  opts:[
+   {t:"Grab it first: “Oh look, the cooking show final!”",d:+2,
+    fb:"Chefs instead of candidates. Within minutes both camps are arguing about soup dumplings — happily."},
+   {t:"Announce: “Who wants to play mahjong?”",d:+2,
+    fb:"The ancient peace treaty. Four players, zero politics, grandma wins everything as always."},
+   {t:"Let them settle it between themselves.",d:-2,
+    fb:"The remote-control summit fails in eleven seconds. Dessert is eaten standing up."}
+  ]}
+];
+var ENDINGS=[
+ {min:8,hz:"和平\n大使",title:"Master of Hotpot Diplomacy",
+  text:"Dessert reached. Nobody stormed off. Grandpa AND cousin Mei both hugged you goodbye — separately, but still. The family group chat is quiet tonight, in a good way."},
+ {min:4,hz:"勉強\n及格",title:"You made it to dessert… barely",
+  text:"There were moments. There was one toast you will remember in your nightmares. But the family is intact, and that counts as a win in an election year."},
+ {min:0,hz:"下次\n加油",title:"Dinner ended at 7:43 pm",
+  text:"Grandma is not speaking to anyone. Two aunts are “checking the soup” permanently. The chairs were pushed back with feeling. Better luck at the Mid-Autumn dinner."}
+];
+var MORAL="Real relationships entail sacrifices and compromises — sometimes you forgo winning the argument so you don't lose the person.";
+var score=5,step=0,stage=document.getElementById('stage'),
+    fill=document.getElementById('fill'),scoreEl=document.getElementById('score');
+function clamp(v){return Math.max(0,Math.min(10,v))}
+function meter(){fill.style.width=(score*10)+'%';scoreEl.textContent='harmony '+score+'/10'}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function scene(){
+  var s=SCENES[step],keys=['甲','乙','丙'];
+  var h='<div class="card fade"><div class="stepno">Course '+(step+1)+' of '+SCENES.length+'</div>'+
+    '<div class="who"><div class="ava '+s.tone+'">'+s.ava+'</div><span class="nm">'+esc(s.who)+'</span></div>'+
+    '<p class="line">'+esc(s.line)+'</p><p class="ctx">'+esc(s.ctx)+'</p><div class="opts">';
+  s.opts.forEach(function(o,i){
+    h+='<button class="opt" data-i="'+i+'"><span class="k">'+keys[i]+'</span>'+esc(o.t)+'</button>';
+  });
+  h+='</div></div>';
+  stage.innerHTML=h;
+  [].forEach.call(stage.querySelectorAll('.opt'),function(b){
+    b.addEventListener('click',function(){pick(+b.getAttribute('data-i'))});
+  });
+}
+function pick(i){
+  var s=SCENES[step],o=s.opts[i];
+  score=clamp(score+o.d);meter();
+  var good=o.d>0,sign=(o.d>0?'+':'')+o.d;
+  var h='<div class="card fade"><div class="stepno">Course '+(step+1)+' of '+SCENES.length+'</div>'+
+    '<div class="fb'+(good?'':' bad')+'"><b class="delta">'+sign+' harmony</b> — '+esc(o.fb)+'</div>'+
+    '<div style="display:flex"><button class="next" id="next">'+(step<SCENES.length-1?'Next course →':'See the verdict →')+'</button></div></div>';
+  stage.innerHTML=h;
+  document.getElementById('next').addEventListener('click',function(){
+    step++;
+    if(step<SCENES.length)scene();else end();
+    window.scrollTo({top:0});
+  });
+}
+function end(){
+  var e=ENDINGS.filter(function(x){return score>=x.min})[0];
+  var h='<div class="card fade" style="text-align:center">'+
+    '<div class="stepno">The verdict · '+score+'/10</div>'+
+    '<div class="seal">'+e.hz.split('\n').join('<br>')+'</div>'+
+    '<p class="rtitle">'+esc(e.title)+'</p>'+
+    '<p class="rtext">'+esc(e.text)+'</p>'+
+    '<p class="moral">'+esc(MORAL)+'</p>'+
+    '<button class="again" id="again">再來 · Play again</button></div>';
+  stage.innerHTML=h;
+  document.getElementById('again').addEventListener('click',function(){score=5;step=0;meter();scene()});
+}
+meter();scene();
+})();
+</script>
+
+</body>
+</html>
